@@ -1,3 +1,4 @@
+import { getStorageItemAsync } from "@/hooks/useStorageState";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -7,10 +8,11 @@ export const appApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: async (headers) => {
+      const token = await getStorageItemAsync("session");
       headers.set('Origin', 'test.com');
       headers.set('Referer', 'test.com');
       headers.set('Accept', 'application/json');
-      headers.set('authorization', `Bearer dupa`);
+      headers.set("authorization", `Bearer ${token}`);
       return headers;
     },
   }),

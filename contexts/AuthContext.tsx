@@ -33,9 +33,16 @@ export function AuthContextProvider(props: React.PropsWithChildren) {
               username,
               password,
             }).unwrap();
-            return data;
+
+            if (data?.token) {
+              setSession(data?.token);
+              return true;
+            }
+            console.error("token has not been delivered :/");
+            return false;
           } catch (error) {
             Alert.alert("Error", error?.data?.message, [{ text: "OK" }]);
+            return false;
           }
         },
         register: async (username, password) => {
