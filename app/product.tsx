@@ -20,12 +20,16 @@ interface FormInputs {
   category: ProductCategory;
   dateAdded: string;
 }
+const iso8601Regex =
+  /^(\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|([+-]\d{2}:\d{2})))?)$/;
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   price: z.string().min(1, { message: "Price is required" }),
   category: z.nativeEnum(ProductCategory),
-  dateAdded: z.string().min(1, { message: "Date is required" }),
+  dateAdded: z.string().refine((val) => iso8601Regex.test(val), {
+    message: "Invalid ISO 8601 date format",
+  }),
 });
 
 const Product = () => {
@@ -52,17 +56,24 @@ const Product = () => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      setIsModified(JSON.stringify(value) !== JSON.stringify(defaultValues));
+      setIsModified(
+        isEditing &&
+          defaultValues &&
+          JSON.stringify(value) !== JSON.stringify(defaultValues)
+      );
     });
     return () => subscription.unsubscribe();
   }, [defaultValues, watch]);
 
   const onAdd = useCallback(
     handleSubmit(async (data) => {
-      console.log(data);
+      console.log("onAdd");
+
       try {
         const response = await create(data);
-        console.log(response);
+        if (response.error) {
+          console.log(JSON.stringify(response));
+        }
         navigation.goBack();
       } catch (error) {
         console.log(error);
@@ -71,10 +82,10 @@ const Product = () => {
     [create]
   );
 
-  console.log(isModified);
-
   const onSave = useCallback(
     handleSubmit(async (data) => {
+      console.log("onSave");
+
       try {
         const response = await update({
           id: defaultValues.id,

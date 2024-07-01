@@ -3,6 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
+export enum SortBy {
+  NAME = "Name",
+  PRICE = "Price",
+  DATE_ADDED = "Date Added",
+  CATEGORY = "Category",
+}
+
+export enum SortingOrder {
+  ASC = "asc",
+  DESC = "desc",
+}
 
 export enum ProductCategory {
   ELECTRONICS = "Electronics",
@@ -24,13 +35,12 @@ interface Credentials {
 }
 
 interface RegisterResponse {
-  // Define the shape of the response for register endpoint
+  // TODO
 }
 
 interface LoginResponse {
-  // Define the shape of the response for login endpoint
+  // TODO
 }
-
 
 export const appApi = createApi({
   reducerPath: 'appApi',
