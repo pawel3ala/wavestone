@@ -12,6 +12,7 @@ import { ApiProvider } from "@reduxjs/toolkit/query/react";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { appApi } from "@/services/api";
+import { AuthContextProvider } from "@/contexts/AuthContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,10 +36,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <ApiProvider api={appApi}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <AuthContextProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </AuthContextProvider>
       </ApiProvider>
     </ThemeProvider>
   );

@@ -7,8 +7,6 @@ export const appApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: async (headers) => {
-      // Assuming getStorageItemAsync is a function that retrieves the token from storage
-      // const token = await getStorageItemAsync('session');
       headers.set('Origin', 'test.com');
       headers.set('Referer', 'test.com');
       headers.set('Accept', 'application/json');

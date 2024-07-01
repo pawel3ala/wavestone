@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import TextInput from "@/components/TextInput";
 import CtaButton from "@/components/CtaButton";
-import { useRegisterMutation } from "@/services/api";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 interface FormInputs {
   username: string;
@@ -18,7 +18,7 @@ const schema = z.object({
   username: z.string().min(1) && z.string(),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" }),
+    .min(8, { message: "Password must be at least 8 characters" }), //TODO: add more stuff
 });
 
 const defaultValues = {
@@ -27,8 +27,7 @@ const defaultValues = {
 };
 
 export default function Register() {
-  const [register, { isLoading, isError, isSuccess, error }] =
-    useRegisterMutation();
+  const { register, isLoading } = useAuthContext();
 
   const {
     control,
@@ -40,10 +39,9 @@ export default function Register() {
   });
 
   const onSubmit = async ({ username, password }: FormInputs) => {
-    const { data } = await register({
-      username,
-      password,
-    });
+    const data = await register(username, password);
+
+    console.log(data);
   };
 
   return (
