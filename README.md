@@ -1,50 +1,119 @@
-# Welcome to your Expo app 👋
+# Wavestone Recruitment Task: React Native Developer
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Application Overview
 
-## Get started
+Develop a React Native application for managing products in a store. This application will feature user authentication and CRUD (Create, Read, Update, Delete) operations for products. The application will utilize Redux for state management and include middleware to interact with an API for product management.
 
-1. Install dependencies
+## Features
 
+1. **Authentication**:
+
+   - **Login Screen**: User login with JWT token-based authorization. ✅
+
+2. **Product Management**:
+
+   - **Product Screen**: Display a list of products with options to add, edit, delete, sort, and filter products. ✅
+   - **Add Product Screen**: Form to add a new product with validation. ✅
+
+3. **Navigation**:
+   - Navbar to navigate between Login, Add Product, and Product screens. ✅
+
+## Detailed Requirements
+
+### 1. Screens
+
+- **Login Screen**:
+
+  - Form fields for username and password. ✅
+  - Authentication using JWT tokens. ✅
+  - Error handling for incorrect login credentials. ✅
+
+- **Product Screen**:
+
+  - Display a list of products after successful login. ✅
+  - Each product item should display name, price, date added, and category. ✅
+  - Options to add a new product, delete a product, and update an existing product. ✅
+  - Sorting options by name, price, date added, and category. ✅
+  - Filtering options by category (Electronics, Clothing, Food). ✅
+
+- **Add Product Screen**:
+  - Form fields for product name, price, category, and date.
+  - Validation:
+    - **Name**: Required, minimum 3 characters. ✅
+    - **Price**: Required, must be a number. ❌
+    - **Category**: Required, must be one of the enum values [Electronics, Clothing, Food].✅
+    - **Date added**: Required, must be a valid date. ✅
+  - Error handling for invalid inputs. ✅
+
+### 2. State Management
+
+- Use Redux for state management. ✅
+- Include middleware to handle asynchronous API calls for CRUD operations. ✅
+
+### 3. API Integration
+
+- Use middleware to interact with an API for:
+  - Fetching the list of products. ✅
+  - Creating a new product. ✅
+  - Updating an existing product. ✅
+  - Deleting a product. ✅
+- Ensure all API interactions are secured with JWT tokens for authorized access. ✅
+
+## Project Structure
+
+### 1. App Folder
+
+The application code resides in the `app` folder, which contains an `Index.tsx` file as the entry point.
+
+### 2. API Folder
+
+The API code resides in the `api` folder.
+
+**API Setup**:
+
+1. Navigate to the `api` folder:
    ```bash
-   npm install
+   cd api
    ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+2. Install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. Start the API server:
 
-## Learn more
+```bash
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+4. Access the Swagger documentation at http://localhost:3000/api-docs.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Project Setup
 
-## Join the community
+1. Prerequisites
 
-Join our community of developers creating universal apps.
+- Ensure you have Node.js and npm installed.
+- Install Expo CLI for React Native development.
+- Note: This application runs only on Android and iOS platforms.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+2. Installation
+
+Install dependencies in the app folder:
+
+```bash
+cd app
+npm install
+```
+
+3. Running the Application
+
+- Start the development server from the app folder:
+
+```bash
+npm start
+```
+
+- Use the Expo Go app on your mobile device to scan the QR code and run the application.
+
+Feel free to reach out if you have any questions or need further clarifications regarding the task. Good luck!
