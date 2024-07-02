@@ -16,7 +16,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 
 interface FormInputs {
   name: string;
-  price: string;
+  price: string; //TODO: convert to number
   category: ProductCategory;
   dateAdded: string;
 }
@@ -24,8 +24,8 @@ const iso8601Regex =
   /^(\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|([+-]\d{2}:\d{2})))?)$/;
 
 const schema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  price: z.string().min(1, { message: "Price is required" }),
+  name: z.string().min(3, { message: "Minimum 3 characters" }),
+  price: z.string().min(1, { message: "Price is required" }), //TODO: convert to number
   category: z.nativeEnum(ProductCategory),
   dateAdded: z.string().refine((val) => iso8601Regex.test(val), {
     message: "Invalid ISO 8601 date format",
@@ -67,8 +67,6 @@ const Product = () => {
 
   const onAdd = useCallback(
     handleSubmit(async (data) => {
-      console.log("onAdd");
-
       try {
         const response = await create(data);
         if (response.error) {
@@ -84,8 +82,6 @@ const Product = () => {
 
   const onSave = useCallback(
     handleSubmit(async (data) => {
-      console.log("onSave");
-
       try {
         const response = await update({
           id: defaultValues.id,
@@ -103,7 +99,6 @@ const Product = () => {
   const onDelete = useCallback(async () => {
     try {
       const response = await deleteProduct(defaultValues.id);
-      console.log(response);
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -134,7 +129,9 @@ const Product = () => {
             isError={errors.name?.message != null}
             style={styles.textInput}
           />
-          {errors.name?.message != null && <Text>{errors.name.message}</Text>}
+          {errors.name?.message != null && (
+            <Text style={styles.errorText}>{errors.name.message}</Text>
+          )}
         </View>
         <View style={{ flexDirection: "row", gap: 10 }}></View>
         <View style={{ justifyContent: "center", width: "100%" }}>
@@ -145,7 +142,9 @@ const Product = () => {
             isError={errors.price?.message != null}
             style={styles.textInput}
           />
-          {errors.price?.message != null && <Text>{errors.price.message}</Text>}
+          {errors.price?.message != null && (
+            <Text style={styles.errorText}>{errors.price.message}</Text>
+          )}
         </View>
         <View style={{ justifyContent: "center", width: "100%" }}>
           <TextInput
@@ -156,7 +155,7 @@ const Product = () => {
             style={styles.textInput}
           />
           {errors.category?.message != null && (
-            <Text>{errors.category.message}</Text>
+            <Text style={styles.errorText}>{errors.category.message}</Text>
           )}
         </View>
         <View style={{ justifyContent: "center", width: "100%" }}>
@@ -175,7 +174,7 @@ const Product = () => {
             }
           />
           {errors.dateAdded?.message != null && (
-            <Text>{errors.dateAdded.message}</Text>
+            <Text style={styles.errorText}>{errors.dateAdded.message}</Text>
           )}
         </View>
       </ThemedView>
@@ -199,5 +198,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginBottom: 10,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 11,
+    marginHorizontal: 10,
   },
 });

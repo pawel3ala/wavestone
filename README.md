@@ -37,27 +37,27 @@ Develop a React Native application for managing products in a store. This applic
   - Filtering options by category (Electronics, Clothing, Food). ✅
 
 - **Add Product Screen**:
-  - Form fields for product name, price, category, and date. 
+  - Form fields for product name, price, category, and date.
   - Validation:
-    - **Name**: Required, minimum 3 characters.
-    - **Price**: Required, must be a number.
-    - **Category**: Required, must be one of the enum values [Electronics, Clothing, Food].
-    - **Date added**: Required, must be a valid date.
-  - Error handling for invalid inputs.
+    - **Name**: Required, minimum 3 characters. ✅
+    - **Price**: Required, must be a number. ❌
+    - **Category**: Required, must be one of the enum values [Electronics, Clothing, Food].✅
+    - **Date added**: Required, must be a valid date. ✅
+  - Error handling for invalid inputs. ✅
 
 ### 2. State Management
 
-- Use Redux for state management.
-- Include middleware to handle asynchronous API calls for CRUD operations.
+- Use Redux for state management. ✅
+- Include middleware to handle asynchronous API calls for CRUD operations. ✅
 
 ### 3. API Integration
 
 - Use middleware to interact with an API for:
-  - Fetching the list of products.
-  - Creating a new product.
-  - Updating an existing product.
-  - Deleting a product.
-- Ensure all API interactions are secured with JWT tokens for authorized access.
+  - Fetching the list of products. ✅
+  - Creating a new product. ✅
+  - Updating an existing product. ✅
+  - Deleting a product. ✅
+- Ensure all API interactions are secured with JWT tokens for authorized access. ✅
 
 ## Project Structure
 

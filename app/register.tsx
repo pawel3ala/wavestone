@@ -19,7 +19,7 @@ const schema = z.object({
   username: z.string().min(1) && z.string(),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" }), //TODO: add more stuff
+    .min(8, { message: "Password must be at least 8 characters" }), //TODO: add more validation stuff
 });
 
 const defaultValues = {
