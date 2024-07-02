@@ -43,6 +43,7 @@ export default function HomeScreen() {
           if (!selectedCategory) return true;
           return product.category === selectedCategory;
         })
+        //TODO: Extract to separate function
         .sort((a, b) => {
           if (sortBy.key === SortBy.NAME) {
             return sortBy.order === SortingOrder.ASC
@@ -101,14 +102,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          gap: 10,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.chipsContainer}>
         {Object.values(ProductCategory).map((category) => (
           <View key={category}>
             <Chip
@@ -128,14 +122,7 @@ export default function HomeScreen() {
           disabled={selectedCategory === null}
         />
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          gap: 5,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.chipsContainer}>
         {Object.values(SortBy).map((sortByItem) => (
           <Chip
             key={sortByItem}
@@ -149,10 +136,7 @@ export default function HomeScreen() {
         ))}
       </View>
       <FlatList
-        style={{
-          flex: 1,
-          width: "100%",
-        }}
+        style={styles.listContainer}
         contentContainerStyle={{
           gap: 10,
         }}
@@ -173,5 +157,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     gap: 10,
     marginTop: 50, // TODO: to be removed
+  },
+  listContainer: {
+    flex: 1,
+    width: "100%",
+  },
+  chipsContainer: {
+    flexDirection: "row",
+    gap: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

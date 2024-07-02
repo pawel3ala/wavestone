@@ -87,7 +87,6 @@ const Product = () => {
           id: defaultValues.id,
           ...data,
         });
-        console.log(response);
         navigation.goBack();
       } catch (error) {
         console.log(error);

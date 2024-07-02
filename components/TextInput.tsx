@@ -5,8 +5,8 @@ import { Colors } from "@/constants/Colors";
 
 type TextInputProps = {
   name: string;
-  control: any;
-  rules?: any;
+  control: any; //TODO: fix type
+  rules?: any; //TODO: fix type
   label: string;
   isError: boolean;
 } & React.ComponentProps<typeof ImportedTextInput>;
