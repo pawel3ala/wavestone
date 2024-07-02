@@ -3,7 +3,7 @@ import React from "react";
 import { Product } from "@/services/api";
 import { router } from "expo-router";
 
-const ProductCard = ({ item }: { item: Product }) => {
+const ProductCard = (item: Product) => {
   const onPress = () => {
     router.push({
       pathname: "/product",

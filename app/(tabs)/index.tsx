@@ -1,9 +1,16 @@
-import { StyleSheet, FlatList, View, Button } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Button,
+  ListRenderItem,
+} from "react-native";
 
 import FloatingButton from "@/components/FloatingButton";
 import { router } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import {
+  Product,
   ProductCategory,
   SortBy,
   SortingOrder,
@@ -12,6 +19,7 @@ import {
 import ProductCard from "@/components/ProductCard";
 import { Chip } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
+import Animated, { FadeInLeft, FadeOutRight } from "react-native-reanimated";
 
 export default function HomeScreen() {
   const { data } = useGetProductsQuery();
@@ -80,6 +88,17 @@ export default function HomeScreen() {
     }));
   };
 
+  const renderItem: ListRenderItem<Product> = ({ item, index }) => {
+    return (
+      <Animated.View
+        entering={FadeInLeft.delay(index * 100)}
+        exiting={FadeOutRight}
+      >
+        <ProductCard {...item} />
+      </Animated.View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -94,6 +113,7 @@ export default function HomeScreen() {
           <View key={category}>
             <Chip
               key={category}
+              compact
               mode="outlined"
               selected={selectedCategory === category}
               onPress={() => setSelectedCategory(category)}
@@ -138,7 +158,7 @@ export default function HomeScreen() {
         }}
         data={products}
         keyExtractor={(item, index) => `${item.id}_${index}`}
-        renderItem={(item) => <ProductCard {...item} />}
+        renderItem={renderItem}
       />
       <FloatingButton onPress={onPress} />
     </View>
