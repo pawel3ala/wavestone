@@ -50,11 +50,12 @@ export function AuthContextProvider(props: React.PropsWithChildren) {
             const data = await registerMutation({
               username,
               password,
-            });
-            // setSession(data?.token);
-            return data;
+            }).unwrap();
+            Alert.alert("Success", data?.message, [{ text: "OK" }]);
+            return true;
           } catch (error) {
-            Alert.alert("Error", error?.data?.message, [{ text: "OK" }]);
+            Alert.alert("Error", error?.data?.errors[0].msg, [{ text: "OK" }]);
+            return false;
           }
         },
         signOut: () => {

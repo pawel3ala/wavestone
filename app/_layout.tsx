@@ -39,8 +39,10 @@ export default function RootLayout() {
         <AuthContextProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
             <Stack.Screen name="product" options={{ presentation: "modal" }} />
+            <Stack.Screen name="login" options={{ headerShown: false }} />
+            <Stack.Screen name="register" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
           </Stack>
         </AuthContextProvider>
       </ApiProvider>

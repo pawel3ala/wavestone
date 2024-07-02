@@ -8,6 +8,7 @@ import { z } from "zod";
 import TextInput from "@/components/TextInput";
 import CtaButton from "@/components/CtaButton";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { Link, router } from "expo-router";
 
 interface FormInputs {
   username: string;
@@ -22,8 +23,8 @@ const schema = z.object({
 });
 
 const defaultValues = {
-  username: "Pablo",
-  password: "Abecadlo1$",
+  username: "",
+  password: "",
 };
 
 export default function Register() {
@@ -39,9 +40,12 @@ export default function Register() {
   });
 
   const onSubmit = async ({ username, password }: FormInputs) => {
-    const data = await register(username, password);
-
-    console.log(data);
+    const isRegistered = await register(username, password);
+    if (isRegistered) {
+      router.replace({
+        pathname: "/login",
+      });
+    }
   };
 
   return (
@@ -80,6 +84,9 @@ export default function Register() {
           onPress={handleSubmit(onSubmit)}
           isLoading={isLoading}
         />
+        <Link href="/login" style={styles.link}>
+          <ThemedText type="link">Already have your account? </ThemedText>
+        </Link>
       </ThemedView>
     </>
   );

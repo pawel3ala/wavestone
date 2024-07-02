@@ -8,7 +8,7 @@ import { z } from "zod";
 import TextInput from "@/components/TextInput";
 import CtaButton from "@/components/CtaButton";
 import { useAuthContext } from "@/hooks/useAuthContext";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 
 interface FormInputs {
   username: string;
@@ -82,6 +82,9 @@ export default function Login() {
           onPress={handleSubmit(onSubmit)}
           isLoading={isLoading}
         />
+        <Link href="/register" style={styles.link}>
+          <ThemedText type="link">Don't have your account yet? </ThemedText>
+        </Link>
       </ThemedView>
     </>
   );
