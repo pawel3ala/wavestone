@@ -83,7 +83,7 @@ const Product = () => {
   const onSave = useCallback(
     handleSubmit(async (data) => {
       try {
-        const response = await update({
+        await update({
           id: defaultValues.id,
           ...data,
         });
@@ -97,7 +97,7 @@ const Product = () => {
 
   const onDelete = useCallback(async () => {
     try {
-      const response = await deleteProduct(defaultValues.id);
+      await deleteProduct(defaultValues.id);
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -108,8 +108,8 @@ const Product = () => {
     navigation.setOptions({
       headerRight: () => (
         <Button
-          title={isModified ? "Save" : isEditing ? "Delete" : "Add"}
-          onPress={isModified ? onSave : isEditing ? onDelete : onAdd}
+          title={isModified ? "Save" : isEditing ? "Delete" : "Add"} //TODO: refactor double tenary
+          onPress={isModified ? onSave : isEditing ? onDelete : onAdd} //TODO: refactor double tenary
         />
       ),
       headerLeft: () => <Button title="Back" onPress={navigation.goBack} />,

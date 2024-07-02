@@ -26,6 +26,7 @@ export default function TextInput(props: TextInputProps) {
   return (
     <ImportedTextInput
       {...props}
+      label={label}
       error={isDirty && isError}
       ref={field.ref}
       underlineColor="transparent"

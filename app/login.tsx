@@ -37,14 +37,17 @@ export default function Login() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = useCallback(async ({ username, password }: FormInputs) => {
-    const isUserAuthenticated = await login(username, password);
-    if (isUserAuthenticated) {
-      router.replace({
-        pathname: "/",
-      });
-    }
-  }, []);
+  const onSubmit = useCallback(
+    async ({ username, password }: FormInputs) => {
+      const isUserAuthenticated = await login(username, password);
+      if (isUserAuthenticated) {
+        router.replace({
+          pathname: "/",
+        });
+      }
+    },
+    [login]
+  );
 
   return (
     <>
