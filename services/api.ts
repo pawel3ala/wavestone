@@ -55,6 +55,7 @@ export const appApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Products'],
   endpoints: (builder) => ({
     register: builder.mutation<RegisterResponse, Credentials>({
       query: (credentials) => ({
@@ -72,9 +73,11 @@ export const appApi = createApi({
     }),
     getProducts: builder.query<Product[], void>({
       query: () => '/products',
+      providesTags: ['Products'],
     }),
     getProductById: builder.query<Product, number>({
       query: (id) => `/products/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Products', id }],
     }),
     createProduct: builder.mutation<Product, Partial<Product>>({
       query: (product) => ({
@@ -82,6 +85,7 @@ export const appApi = createApi({
         method: 'POST',
         body: product,
       }),
+      invalidatesTags: ['Products'],
     }),
     updateProduct: builder.mutation<Product, { id: number } & Partial<Product>>({
       query: ({ id, ...product }) => ({
@@ -89,12 +93,14 @@ export const appApi = createApi({
         method: 'PUT',
         body: product,
       }),
+      invalidatesTags: ['Products'],
     }),
     deleteProduct: builder.mutation<{ success: boolean }, number>({
       query: (id) => ({
         url: `/products/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Products'],
     }),
   }),
 });

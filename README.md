@@ -8,15 +8,15 @@ Develop a React Native application for managing products in a store. This applic
 
 1. **Authentication**:
 
-   - **Login Screen**: User login with JWT token-based authorization.
+   - **Login Screen**: User login with JWT token-based authorization. ✅
 
 2. **Product Management**:
 
-   - **Product Screen**: Display a list of products with options to add, edit, delete, sort, and filter products.
-   - **Add Product Screen**: Form to add a new product with validation.
+   - **Product Screen**: Display a list of products with options to add, edit, delete, sort, and filter products. ✅
+   - **Add Product Screen**: Form to add a new product with validation. ✅
 
 3. **Navigation**:
-   - Navbar to navigate between Login, Add Product, and Product screens.
+   - Navbar to navigate between Login, Add Product, and Product screens. ✅
 
 ## Detailed Requirements
 
@@ -24,20 +24,20 @@ Develop a React Native application for managing products in a store. This applic
 
 - **Login Screen**:
 
-  - Form fields for username and password.
-  - Authentication using JWT tokens.
-  - Error handling for incorrect login credentials.
+  - Form fields for username and password. ✅
+  - Authentication using JWT tokens. ✅
+  - Error handling for incorrect login credentials. ✅
 
 - **Product Screen**:
 
-  - Display a list of products after successful login.
-  - Each product item should display name, price, date added, and category.
-  - Options to add a new product, delete a product, and update an existing product.
-  - Sorting options by name, price, date added, and category.
-  - Filtering options by category (Electronics, Clothing, Food).
+  - Display a list of products after successful login. ✅
+  - Each product item should display name, price, date added, and category. ✅
+  - Options to add a new product, delete a product, and update an existing product. ✅
+  - Sorting options by name, price, date added, and category. ✅
+  - Filtering options by category (Electronics, Clothing, Food). ✅
 
 - **Add Product Screen**:
-  - Form fields for product name, price, category, and date.
+  - Form fields for product name, price, category, and date. 
   - Validation:
     - **Name**: Required, minimum 3 characters.
     - **Price**: Required, must be a number.
